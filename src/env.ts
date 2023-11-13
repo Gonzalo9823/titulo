@@ -7,7 +7,7 @@ export const env = createEnv({
     NODE_ENV: z.union([z.literal('development'), z.literal('production')]),
     PORT: z.coerce.number(),
     DATABASE_URL: z.string(),
-    ORM: z.union([z.literal('type-orm'), z.literal('mikro-orm')]),
+    ORM: z.union([z.literal('type-orm'), z.literal('mikro-orm'), z.literal('pg')]),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

@@ -1,8 +1,5 @@
 import 'reflect-metadata';
 
-import { initMikroOrm } from '~/infrastructures/mikro-orm';
-import { AppDataSource } from '~/infrastructures/type-orm';
-
 import { app } from '~/interfaces/fastify/app';
 
 import { env } from '~/env';
@@ -10,9 +7,18 @@ import { env } from '~/env';
 const start = async () => {
   try {
     if (env.ORM === 'type-orm') {
+      const { AppDataSource } = await import('~/infrastructures/type-orm');
       await AppDataSource.initialize();
-    } else {
+    }
+
+    if (env.ORM === 'mikro-orm') {
+      const { initMikroOrm } = await import('~/infrastructures/mikro-orm');
       await initMikroOrm();
+    }
+
+    if (env.ORM === 'pg') {
+      const { pool } = await import('~/infrastructures/pg');
+      await pool.connect();
     }
 
     await app.listen({ port: env.PORT, host: '0.0.0.0' });

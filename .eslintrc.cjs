@@ -60,6 +60,12 @@ module.exports = {
       rules: {
         'import/extensions': 'off'
       }
+    },
+    {
+      files: ['src/infrastructures/pg/entities/**', 'src/infrastructures/pg/transformers/**'],
+      rules: {
+        '@typescript-eslint/naming-convention': 'off'
+      }
     }
   ]
 }

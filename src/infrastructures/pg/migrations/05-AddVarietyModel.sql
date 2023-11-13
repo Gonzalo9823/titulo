@@ -1,0 +1,2 @@
+CREATE TABLE "varieties" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "created_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "updated_at" TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(), "name" character varying NOT NULL, "commodity_id" uuid NOT NULL, CONSTRAINT "VARIETY_NAME_COMMODITY" UNIQUE ("name", "commodity_id"), CONSTRAINT "PK_f229db9682abd731367f2dccaea" PRIMARY KEY ("id"));
+ALTER TABLE "varieties" ADD CONSTRAINT "FK_54cc7ee80d2c0fdc958fd4912b0" FOREIGN KEY ("commodity_id") REFERENCES "commodities"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
