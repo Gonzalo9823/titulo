@@ -38,7 +38,7 @@ export class GrowerMikroORMRepository implements GrowerDBRepository {
     };
   }
 
-  async findById(id: string): Promise<Grower> {
+  async findById(id: UUID): Promise<Grower> {
     const grower = await this.getGrower(id);
 
     return GrowerTransformer.toDomain(grower);

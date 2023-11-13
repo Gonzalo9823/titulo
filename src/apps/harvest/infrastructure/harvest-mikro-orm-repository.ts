@@ -35,7 +35,7 @@ export class HarvestMikroORMRepository implements HarvestDBRepository {
     };
   }
 
-  async findById(id: string): Promise<Harvest> {
+  async findById(id: UUID): Promise<Harvest> {
     const harvest = await this.getHarvest(id);
 
     return HarvestTransformer.toDomain(harvest);

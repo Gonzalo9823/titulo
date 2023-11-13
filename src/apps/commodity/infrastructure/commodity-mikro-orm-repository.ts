@@ -38,7 +38,7 @@ export class CommodityMikroORMRepository implements CommodityDBRepository {
     };
   }
 
-  async findById(id: string): Promise<Commodity> {
+  async findById(id: UUID): Promise<Commodity> {
     const commodity = await this.getCommodity(id);
 
     return CommodityTransformer.toDomain(commodity);

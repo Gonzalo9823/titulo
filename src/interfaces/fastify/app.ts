@@ -2,11 +2,8 @@ import cors from '@fastify/cors';
 import formbody from '@fastify/formbody';
 import helmet from '@fastify/helmet';
 import requestLogger from '@mgcrea/fastify-request-logger';
-import { RequestContext } from '@mikro-orm/core';
 import fastify from 'fastify';
 import { serializerCompiler, validatorCompiler } from 'fastify-type-provider-zod';
-
-import { getEntityManager } from '~/infrastructures/mikro-orm';
 
 import { ErrorHandler } from '~/interfaces/fastify/error-handler';
 import { routes } from '~/interfaces/fastify/routes';
@@ -14,7 +11,16 @@ import { routes } from '~/interfaces/fastify/routes';
 import { env } from '~/env';
 
 const app = fastify({
-  logger: { transport: { target: '@mgcrea/pino-pretty-compact', options: { colorize: true } } },
+  logger: {
+    level: 'debug',
+    transport: {
+      target: '@mgcrea/pino-pretty-compact',
+      options: {
+        translateTime: 'HH:MM:ss Z',
+        ignore: 'pid,hostname',
+      },
+    },
+  },
   disableRequestLogging: true,
 });
 
@@ -47,9 +53,14 @@ app.setErrorHandler(ErrorHandler);
 
 // Add Mikro ORM RequestContext
 if (env.ORM === 'mikro-orm') {
-  app.addHook('preHandler', (_request, _reply, done) => {
-    RequestContext.create(getEntityManager(), done);
-  });
+  (async () => {
+    const { RequestContext } = await import('@mikro-orm/core');
+    const { getEntityManager } = await import('~/infrastructures/mikro-orm');
+
+    app.addHook('preHandler', (_request, _reply, done) => {
+      RequestContext.create(getEntityManager(), done);
+    });
+  })();
 }
 
 // Add Routes

@@ -2,6 +2,7 @@
   "compilerOptions": {
     "incremental": true,
     "target": "ESNEXT",
+    "module": "commonjs",
     "allowJs": false,
     "checkJs": false,
     "jsx": "react",
@@ -41,6 +42,10 @@
     "inlineSourceMap": false,
     "inlineSources": false,
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
-  }
+    "emitDecoratorMetadata": true,
+    "types": [
+      "./global.d.ts",
+      "node_modules/@types"
+    ]
+  },
 }

@@ -29,14 +29,14 @@ export class ClientMikroORMRepository implements ClientDBRepository {
     };
   }
 
-  async findById(id: string): Promise<Client> {
+  async findById(id: UUID): Promise<Client> {
     const client = await this.getClient(id);
 
     return ClientTransformer.toDomain(client);
   }
 
   // Private Methods
-  async addDataToClient(client: ClientModel, clientData: CreateClientDto) {
+  private async addDataToClient(client: ClientModel, clientData: CreateClientDto) {
     try {
       const { name, lastName, email } = clientData;
 
@@ -50,7 +50,7 @@ export class ClientMikroORMRepository implements ClientDBRepository {
     }
   }
 
-  async getClients(page?: number) {
+  private async getClients(page?: number) {
     const [clients, count] = await getEntityManager().findAndCount(
       ClientModel,
       {},
@@ -66,7 +66,7 @@ export class ClientMikroORMRepository implements ClientDBRepository {
     return { clients, count };
   }
 
-  async getClient(id: UUID): Promise<ClientModel> {
+  private async getClient(id: UUID): Promise<ClientModel> {
     const client = await getEntityManager().findOne(ClientModel, {
       id,
     });

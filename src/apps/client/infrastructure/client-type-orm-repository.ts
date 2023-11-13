@@ -29,14 +29,14 @@ export class ClientTypeORMRepository implements ClientDBRepository {
     };
   }
 
-  async findById(id: string): Promise<Client> {
+  async findById(id: UUID): Promise<Client> {
     const client = await this.getClient(id);
 
     return ClientTransformer.toDomain(client);
   }
 
   // Private Methods
-  async addDataToClient(client: ClientModel, clientData: CreateClientDto): Promise<void> {
+  private async addDataToClient(client: ClientModel, clientData: CreateClientDto): Promise<void> {
     try {
       const { name, lastName, email } = clientData;
 
@@ -50,7 +50,7 @@ export class ClientTypeORMRepository implements ClientDBRepository {
     }
   }
 
-  async getClients(page?: number): Promise<{ clients: ClientModel[]; count: number }> {
+  private async getClients(page?: number): Promise<{ clients: ClientModel[]; count: number }> {
     const [clients, count] = await AppDataSource.getRepository(ClientModel).findAndCount({
       order: {
         createdAt: 'DESC',
@@ -62,7 +62,7 @@ export class ClientTypeORMRepository implements ClientDBRepository {
     return { clients, count };
   }
 
-  async getClient(id: UUID): Promise<ClientModel> {
+  private async getClient(id: UUID): Promise<ClientModel> {
     const client = await AppDataSource.getRepository(ClientModel).findOne({
       where: {
         id,
