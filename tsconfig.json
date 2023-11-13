@@ -29,8 +29,12 @@
     "noImplicitReturns": false,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "baseUrl": "~/",
-    "allowSyntheticDefaultImports": false,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": [
+        "./src/*"
+      ]
+    },
     "esModuleInterop": true,
     "preserveSymlinks": false,
     "allowUmdGlobalAccess": false,

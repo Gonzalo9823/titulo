@@ -6,6 +6,9 @@ module.exports = {
   root: true,
   rules: {
     'prettier/prettier': ['error'],
+    '@shopify/binary-assignment-parens': 'off',
+    '@typescript-eslint/no-extraneous-class': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
   },
   overrides: [
     {
@@ -14,5 +17,11 @@ module.exports = {
         'no-process-env': 'off',
       },
     },
+    {
+      files: ['src/interfaces/fastify/error-handler.ts', 'src/index.ts'],
+      rules: {
+        'no-console': 'off'
+      }
+    }
   ]
 }

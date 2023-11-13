@@ -4,8 +4,17 @@
   "main": "index.js",
   "author": "<gonzalocaballero@me.com>",
   "license": "MIT",
+  "scripts": {
+    "lint": "tsc --noEmit && eslint \"{src,tests}/**/*.ts\"",
+    "start:dev": "clear && NODE_ENV=development ts-node-dev -r tsconfig-paths/register --poll --respawn src/index.ts",
+    "typeorm:dev": "NODE_ENV=development node -r tsconfig-paths/register -r ts-node/register ./node_modules/typeorm/cli.js -d src/infrastructure/type-orm/index.ts",
+    "build": "tsc && rm -v -rf src",
+    "start": "TS_NODE_BASEURL=./build/src node -r tsconfig-paths/register ./build/src/index.js",
+    "typeorm": "TS_NODE_BASEURL=./build/src node -r tsconfig-paths/register -r ts-node/register ./node_modules/typeorm/cli.js -d build/src/infrastructure/type-orm/index.js"
+  },
   "devDependencies": {
     "@shopify/eslint-plugin": "^43.0.0",
+    "@types/http-errors": "^2.0.4",
     "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
@@ -13,10 +22,23 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
     "prettier": "^3.0.3",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2"
   },
   "dependencies": {
+    "@fastify/cors": "^8.4.1",
+    "@fastify/formbody": "^7.4.0",
+    "@fastify/helmet": "^11.1.1",
+    "@mgcrea/fastify-request-logger": "^1.4.0",
     "@t3-oss/env-core": "^0.7.1",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.3",
+    "fastify-type-provider-zod": "^1.1.9",
+    "http-errors": "^2.0.0",
+    "inversify": "^6.0.2",
+    "pg": "^8.11.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.17",
     "zod": "^3.22.4"
   }
 }
