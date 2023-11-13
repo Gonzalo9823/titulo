@@ -25,3 +25,8 @@ Cada uno se puede usar corriendo un comando diferente.
 | mstart:dev:typeorm        | Corre app en development usando Mikro ORM.                                                    |
 | typeorm                   | Permite correr comandos de Type ORM en producción.                                            |
 | typeorm:dev               | RPermite correr comandos de Type ORM en development.                                          |
+
+## Costo Oportunidad
+El modelo Clean Architecture hace que el escribir una app sea mas lento pero permite hacer cambios a esta de una forma bastante facil ya que hay una notoria distinción de cada una de las partes. Por otro lado en el futuro hay que estudiar el uso de RAM/CPU para obtener metricas más reales y entender cual es el costo computacional de esta arquitectura.
+
+Por otro lado se agregaron varios ORM para así poder entender en el futuro las diferentes tecnicas que usan cada uno de estos para obtener la data y cual es su costo.
