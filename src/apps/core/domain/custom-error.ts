@@ -11,6 +11,7 @@ export enum ErrorCode {
   InvalidData = 'INVALID_DATA',
   ConstraintError = 'CONSTRAINT_ERROR',
   CantTransformInfrastructureToDomain = 'CANT_TRANSFORM_INFRASTRUCTURE_TO_DOMAIN',
+  DatabaseConnection = 'DATABASE_CONNECTION',
 }
 
 export enum ContextErrorType {

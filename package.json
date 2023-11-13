@@ -5,12 +5,14 @@
   "author": "<gonzalocaballero@me.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "tsc --noEmit && eslint \"{src,tests}/**/*.ts\"",
-    "start:dev": "clear && NODE_ENV=development ts-node-dev -r tsconfig-paths/register --poll --respawn src/index.ts",
-    "typeorm:dev": "NODE_ENV=development node -r tsconfig-paths/register -r ts-node/register ./node_modules/typeorm/cli.js -d src/infrastructures/type-orm/index.ts",
     "build": "tsc && rm -v -rf src",
-    "start": "TS_NODE_BASEURL=./build/src node -r tsconfig-paths/register ./build/src/index.js",
-    "typeorm": "TS_NODE_BASEURL=./build/src node -r tsconfig-paths/register -r ts-node/register ./node_modules/typeorm/cli.js -d build/src/infrastructures/type-orm/index.js"
+    "lint": "tsc --noEmit && eslint \"{src,tests}/**/*.ts\"",
+    "mikro": "TS_NODE_BASEURL=./build/src NODE_ENV=production ORM=mikro-orm MIKRO_ORM_CLI=build/src/infrastructures/mikro-orm/mikro-orm.config.js node_modules/.bin/mikro-orm",
+    "mikro:dev": "NODE_ENV=development ORM=mikro-orm MIKRO_ORM_CLI=src/infrastructures/mikro-orm/mikro-orm.config.ts node_modules/.bin/mikro-orm",
+    "start:dev:mikro": "NODE_ENV=development ORM=mikro-orm ts-node-dev -r tsconfig-paths/register --poll --respawn src/index.ts",
+    "start:dev:typeorm": "NODE_ENV=development ORM=type-orm ts-node-dev -r tsconfig-paths/register --poll --respawn src/index.ts",
+    "typeorm:dev": "NODE_ENV=development ORM=type-orm node -r tsconfig-paths/register -r ts-node/register ./node_modules/typeorm/cli.js -d src/infrastructures/type-orm/index.ts",
+    "typeorm": "TS_NODE_BASEURL=./build/src NODE_ENV=production ORM=type-orm node -r tsconfig-paths/register -r ts-node/register ./node_modules/typeorm/cli.js -d build/src/infrastructures/type-orm/index.js"
   },
   "devDependencies": {
     "@shopify/eslint-plugin": "^43.0.0",
@@ -31,7 +33,9 @@
     "@fastify/formbody": "^7.4.0",
     "@fastify/helmet": "^11.1.1",
     "@mgcrea/fastify-request-logger": "^1.4.0",
+    "@mikro-orm/cli": "^5.9.3",
     "@mikro-orm/core": "^5.9.3",
+    "@mikro-orm/migrations": "^5.9.3",
     "@mikro-orm/postgresql": "^5.9.3",
     "@t3-oss/env-core": "^0.7.1",
     "dotenv": "^16.3.1",
