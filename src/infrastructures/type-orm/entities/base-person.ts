@@ -1,6 +1,6 @@
 import { Column } from 'typeorm';
 
-import { CustomBaseModel } from '~/infrastructure/type-orm/entities/custom-base';
+import { CustomBaseModel } from '~/infrastructures/type-orm/entities/custom-base';
 
 export abstract class BasePersonModel extends CustomBaseModel {
   @Column()

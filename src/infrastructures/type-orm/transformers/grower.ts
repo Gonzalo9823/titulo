@@ -1,6 +1,7 @@
 import { Grower } from '~/apps/grower/domain/grower';
-import { GrowerModel } from '~/infrastructure/type-orm/entities/grower';
-import { GrowerFarmTransformer } from '~/infrastructure/type-orm/transformers/grower-farm';
+
+import { GrowerModel } from '~/infrastructures/type-orm/entities/grower';
+import { GrowerFarmTransformer } from '~/infrastructures/type-orm/transformers/grower-farm';
 
 export class GrowerTransformer {
   static toDomain(grower: PartialBy<GrowerModel, 'farms'>): Grower {

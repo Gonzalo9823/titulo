@@ -1,8 +1,8 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 
-import { CustomBaseModel } from '~/infrastructure/type-orm/entities/custom-base';
-import { VarietyModel } from '~/infrastructure/type-orm/entities/variety';
-import { HarvestModel } from '~/infrastructure/type-orm/entities/harvest';
+import { CustomBaseModel } from '~/infrastructures/type-orm/entities/custom-base';
+import { HarvestModel } from '~/infrastructures/type-orm/entities/harvest';
+import { VarietyModel } from '~/infrastructures/type-orm/entities/variety';
 
 @Entity({ name: 'commodities' })
 export class CommodityModel extends CustomBaseModel {

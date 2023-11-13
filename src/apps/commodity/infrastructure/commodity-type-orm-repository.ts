@@ -5,11 +5,12 @@ import { Commodity } from '~/apps/commodity/domain/commodity';
 import { CommodityDBRepository, CreateCommodityDto } from '~/apps/commodity/domain/commodity-db-repository';
 import { ContextErrorType, CustomError, ErrorCode, ErrorType } from '~/apps/core/domain/custom-error';
 import { UUID } from '~/apps/core/domain/uuid';
-import { AppDataSource } from '~/infrastructure/type-orm';
-import { CommodityModel } from '~/infrastructure/type-orm/entities/commodity';
-import { VarietyModel } from '~/infrastructure/type-orm/entities/variety';
-import { ErrorHandler } from '~/infrastructure/type-orm/error-handler';
-import { CommodityTransformer } from '~/infrastructure/type-orm/transformers/commodity';
+
+import { AppDataSource } from '~/infrastructures/type-orm';
+import { CommodityModel } from '~/infrastructures/type-orm/entities/commodity';
+import { VarietyModel } from '~/infrastructures/type-orm/entities/variety';
+import { ErrorHandler } from '~/infrastructures/type-orm/error-handler';
+import { CommodityTransformer } from '~/infrastructures/type-orm/transformers/commodity';
 
 @injectable()
 export class CommodityTypeORMRepository implements CommodityDBRepository {
@@ -34,7 +35,7 @@ export class CommodityTypeORMRepository implements CommodityDBRepository {
   }
 
   async findById(id: UUID): Promise<Commodity> {
-    const commodity = await this.getCommodityById(id);
+    const commodity = await this.getCommodity(id);
 
     return CommodityTransformer.toDomain(commodity);
   }
@@ -96,13 +97,18 @@ export class CommodityTypeORMRepository implements CommodityDBRepository {
     };
   }
 
-  private async getCommodityById(id: UUID): Promise<CommodityModel> {
+  private async getCommodity(id: UUID): Promise<CommodityModel> {
     const commodity = await AppDataSource.getRepository(CommodityModel).findOne({
       relations: {
         varieties: true,
       },
       where: {
         id,
+      },
+      order: {
+        varieties: {
+          createdAt: 'DESC',
+        },
       },
     });
 

@@ -1,7 +1,7 @@
 import { Entity, OneToMany } from 'typeorm';
 
-import { BasePersonModel } from '~/infrastructure/type-orm/entities/base-person';
-import { HarvestModel } from '~/infrastructure/type-orm/entities/harvest';
+import { BasePersonModel } from '~/infrastructures/type-orm/entities/base-person';
+import { HarvestModel } from '~/infrastructures/type-orm/entities/harvest';
 
 @Entity({ name: 'clients' })
 export class ClientModel extends BasePersonModel {

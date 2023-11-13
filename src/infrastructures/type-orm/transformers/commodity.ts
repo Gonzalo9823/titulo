@@ -1,6 +1,7 @@
 import { Commodity } from '~/apps/commodity/domain/commodity';
-import { CommodityModel } from '~/infrastructure/type-orm/entities/commodity';
-import { VarietyTransformer } from '~/infrastructure/type-orm/transformers/variety';
+
+import { CommodityModel } from '~/infrastructures/type-orm/entities/commodity';
+import { VarietyTransformer } from '~/infrastructures/type-orm/transformers/variety';
 
 export class CommodityTransformer {
   static toDomain(commodity: PartialBy<CommodityModel, 'varieties'>): Commodity {

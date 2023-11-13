@@ -1,5 +1,6 @@
 import { Variety } from '~/apps/commodity/domain/variety';
-import { VarietyModel } from '~/infrastructure/type-orm/entities/variety';
+
+import { VarietyModel } from '~/infrastructures/type-orm/entities/variety';
 
 export class VarietyTransformer {
   static toDomain(variety: VarietyModel): Variety {

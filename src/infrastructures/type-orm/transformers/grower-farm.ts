@@ -1,5 +1,6 @@
 import { GrowerFarm } from '~/apps/grower/domain/grower-farm';
-import { GrowerFarmModel } from '~/infrastructure/type-orm/entities/grower-farm';
+
+import { GrowerFarmModel } from '~/infrastructures/type-orm/entities/grower-farm';
 
 export class GrowerFarmTransformer {
   static toDomain(growerFarm: GrowerFarmModel): GrowerFarm {

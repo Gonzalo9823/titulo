@@ -5,11 +5,12 @@ import { ContextErrorType, CustomError, ErrorCode, ErrorType } from '~/apps/core
 import { UUID } from '~/apps/core/domain/uuid';
 import { Grower } from '~/apps/grower/domain/grower';
 import { CreateGrowerDto, GrowerDBRepository } from '~/apps/grower/domain/grower-db-repository';
-import { AppDataSource } from '~/infrastructure/type-orm';
-import { GrowerModel } from '~/infrastructure/type-orm/entities/grower';
-import { GrowerFarmModel } from '~/infrastructure/type-orm/entities/grower-farm';
-import { ErrorHandler } from '~/infrastructure/type-orm/error-handler';
-import { GrowerTransformer } from '~/infrastructure/type-orm/transformers/grower';
+
+import { AppDataSource } from '~/infrastructures/type-orm';
+import { GrowerModel } from '~/infrastructures/type-orm/entities/grower';
+import { GrowerFarmModel } from '~/infrastructures/type-orm/entities/grower-farm';
+import { ErrorHandler } from '~/infrastructures/type-orm/error-handler';
+import { GrowerTransformer } from '~/infrastructures/type-orm/transformers/grower';
 
 @injectable()
 export class GrowerTypeORMRepository implements GrowerDBRepository {
@@ -102,6 +103,11 @@ export class GrowerTypeORMRepository implements GrowerDBRepository {
       },
       where: {
         id,
+      },
+      order: {
+        farms: {
+          createdAt: 'DESC',
+        },
       },
     });
 

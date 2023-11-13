@@ -1,17 +1,18 @@
 import { injectable } from 'inversify';
 
+import { Client } from '~/apps/client/domain/client';
 import { ClientDBRepository, CreateClientDto } from '~/apps/client/domain/client-db-repository';
 import { ContextErrorType, CustomError, ErrorCode, ErrorType } from '~/apps/core/domain/custom-error';
-import { Person } from '~/apps/core/domain/person';
 import { UUID } from '~/apps/core/domain/uuid';
-import { AppDataSource } from '~/infrastructure/type-orm';
-import { ClientModel } from '~/infrastructure/type-orm/entities/client';
-import { ErrorHandler } from '~/infrastructure/type-orm/error-handler';
-import { ClientTransformer } from '~/infrastructure/type-orm/transformers/client';
+
+import { AppDataSource } from '~/infrastructures/type-orm';
+import { ClientModel } from '~/infrastructures/type-orm/entities/client';
+import { ErrorHandler } from '~/infrastructures/type-orm/error-handler';
+import { ClientTransformer } from '~/infrastructures/type-orm/transformers/client';
 
 @injectable()
 export class ClientTypeORMRepository implements ClientDBRepository {
-  async create(clientData: CreateClientDto): Promise<Person> {
+  async create(clientData: CreateClientDto): Promise<Client> {
     const newClient = new ClientModel();
 
     await this.addDataToClient(newClient, clientData);
@@ -19,7 +20,7 @@ export class ClientTypeORMRepository implements ClientDBRepository {
     return ClientTransformer.toDomain(newClient);
   }
 
-  async findMany(page?: number): Promise<{ clients: Person[]; count: number }> {
+  async findMany(page?: number): Promise<{ clients: Client[]; count: number }> {
     const { clients, count } = await this.getClients(page);
 
     return {
@@ -28,7 +29,7 @@ export class ClientTypeORMRepository implements ClientDBRepository {
     };
   }
 
-  async findById(id: string): Promise<Person> {
+  async findById(id: string): Promise<Client> {
     const client = await this.getClient(id);
 
     return ClientTransformer.toDomain(client);

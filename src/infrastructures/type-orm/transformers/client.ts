@@ -1,5 +1,6 @@
 import { Client } from '~/apps/client/domain/client';
-import { ClientModel } from '~/infrastructure/type-orm/entities/client';
+
+import { ClientModel } from '~/infrastructures/type-orm/entities/client';
 
 export class ClientTransformer {
   static toDomain(client: ClientModel): Client {

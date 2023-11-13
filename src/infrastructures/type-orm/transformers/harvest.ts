@@ -1,10 +1,11 @@
 import { Harvest } from '~/apps/harvest/domain/harvest';
-import { HarvestModel } from '~/infrastructure/type-orm/entities/harvest';
-import { ClientTransformer } from '~/infrastructure/type-orm/transformers/client';
-import { CommodityTransformer } from '~/infrastructure/type-orm/transformers/commodity';
-import { GrowerTransformer } from '~/infrastructure/type-orm/transformers/grower';
-import { GrowerFarmTransformer } from '~/infrastructure/type-orm/transformers/grower-farm';
-import { VarietyTransformer } from '~/infrastructure/type-orm/transformers/variety';
+
+import { HarvestModel } from '~/infrastructures/type-orm/entities/harvest';
+import { ClientTransformer } from '~/infrastructures/type-orm/transformers/client';
+import { CommodityTransformer } from '~/infrastructures/type-orm/transformers/commodity';
+import { GrowerTransformer } from '~/infrastructures/type-orm/transformers/grower';
+import { GrowerFarmTransformer } from '~/infrastructures/type-orm/transformers/grower-farm';
+import { VarietyTransformer } from '~/infrastructures/type-orm/transformers/variety';
 
 export class HarvestTransformer {
   static toDomain(harvest: HarvestModel): Harvest {
